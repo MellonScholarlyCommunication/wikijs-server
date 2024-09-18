@@ -3,15 +3,19 @@
         "multi": {
             "handlers": [
                 [
+                 // Accept only Announces from claimbot server
                  { 
                     "id": "@handler/notification_handler/jsonpath_filter.js",
                     "anyOf": [ 
                         [ 
-                            { "path": "$.type" , "value": "Offer" } 
+                            { "path": "$.type" , "value": "Offer" } ,
+                            { "path": "$.origin.id" , "value": "https://mycontributions.info/service/m/profile/card#me" }
                         ]
                     ]
                  },
+                 // Update the wikijs
                  "./handler/wikijs_update.js",
+                 // Send an Announce reply
                  {
                     "id": "./handler/announce_result.js",
                     "actor": {
