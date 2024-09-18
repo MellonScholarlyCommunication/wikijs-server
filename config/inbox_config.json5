@@ -16,6 +16,7 @@
                  // Update the wikijs
                  "./handler/wikijs_update.js",
                  // Send an Announce reply
+                 
                  {
                     "id": "./handler/announce_result.js",
                     "actor": {
