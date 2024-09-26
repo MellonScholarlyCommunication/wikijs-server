@@ -1,23 +1,35 @@
 const logger = require('ldn-inbox-server').getLogger();
+const { fetchOriginal } = require('ldn-inbox-server');
 const fsPath = require('path');
-const { resolvePage , getPage, contentInserter, updatePage } = require('wikijs-cli');
+const { resolvePage , getPage, updatePage } = require('wikijs-cli');
+const { stringSimilarity } = require("string-similarity-js");
 
 /**
  * Handler to update wiki.js with new data
  */
 async function handle({path,options,config,notification}) {
+    const similarityTreshold = 
+            config.threshold ? config.threshold : 0.999;
+
     try {
-        const researcherProfile = notification['object']['context'];
+        const researcherProfile = notification['object']['isVersionOf']['id'];
 
         if (! researcherProfile) {
-            logger.error(`failed to find object.context property in notification`);
+            logger.error(`failed to find object.isVersionOf.id property in notification`);
             return { path, options, success: false };
         }
 
-        const htmlCitation = notification['object']['object']['content'];
+        const updateUrl = notification['object']['id'];
 
-        if (! htmlCitation) {
-            logger.error(`failed to find object.object.content property in notification`);
+        if (! updateUrl) {
+            logger.error(`failed to find object.id property in notification`);
+            return { path, options, success: false };
+        }
+
+        const updatedContent = await fetchOriginal(updateUrl);
+       
+        if (! updatedContent) {
+            logger.error(`failed to retrieve ${updateUrl}`);
             return { path, options, success: false };
         }
 
@@ -52,22 +64,14 @@ async function handle({path,options,config,notification}) {
         }
 
         const currentContent = currentPage.content;
-        
-        logger.debug(`currentContent`);
-        logger.debug(currentContent);
-        logger.debug(`htmlCitation`);
-        logger.debug(htmlCitation);
 
-        const updatedContent = await contentInserter(currentContent, htmlCitation, {
-            tag: "mastodon-bot",
-            overwrite: false,
-            similarity: 0.9,
-            similarityNormalization: 'html'
-        });
+        const simScore = stringSimilarity(currentContent,updatedContent);
 
-        if (updatedContent) {
+        logger.info(`updated content has a similarity score of ${simScore}`);
+        logger.debug(updatedContent);
+
+        if (simScore < similarityTreshold) {
             logger.info(`content needs to be updated`);
-            logger.debug(updatedContent);
             options['has_update'] = true;
         }
         else {
