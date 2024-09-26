@@ -8,6 +8,10 @@ An experimental Wikijs Service Provider using the [Event Notification](https://w
 yarn install
 ```
 
+```
+npm link wikijs-cli
+```
+
 ## Run the server
 
 ```
@@ -24,7 +28,12 @@ Example incoming notification:
 
 ```
 {
-  "@context": "https://www.w3.org/ns/activitystreams",
+  "@context": [
+      "https://www.w3.org/ns/activitystreams",
+      {
+        "isVersionOf": "http://purl.org/dc/terms/isVersionOf"
+      }
+  ],
   "id": "urn:uuid:8df032f9-0c25-4166-add5-8e129bb21cf0",
   "type": "Offer",
   "published": "2024-09-18T11:27:09.785Z",
@@ -34,14 +43,17 @@ Example incoming notification:
     "inbox": "https://mycontributions.info/service/m/inbox/",
     "type": "Service"
   },
+  "origin": {
+    "id": "https://mycontributions.info/service/m/profile/card#me",
+    "name": "Mastodon Bot",
+    "type": "Service"
+  },
   "object": {
-    "id": "urn:uuid:9ea5c26b-3ba1-4e52-bfa1-989ad0b3165b",
-    "type": "Announce",
-    "context": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
-    "object": {
-        "id": "urn:uuid:bd8dfe07-afce-4ef9-acbc-feb65508ec6e",
-        "type": "Note",
-        "content": "<div class=\"csl-bib-body\">\n  <div data-csl-entry-id=\"G4AC2ST9\" class=\"csl-entry\">Arndt, D., De Roo, J., Hochstenbach, P., Martens, R., Ongenae, F., &#38; van Noort, M. (2024). RDF Surfaces as a First-Order Language for the Semantic Web. In S. Kirrane, M. Šimkus, A. Soylu, &#38; D. Roman (Eds.), <i>Rules and Reasoning</i> (pp. 200–216). Springer Nature Switzerland. https://doi.org/10.1007/978-3-031-72407-7_15</div>\n</div>"
+    "id": "http://localhost:8000/data/example.md",
+    "type": "Document",
+    "isVersionOf": {
+      "id": "https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171",
+      "type": "WebPage"
     }
   },
   "target": {
@@ -104,3 +116,4 @@ yarn run handle-outbox
 ```
 yarn run real-clean
 ```
+
