@@ -65,6 +65,17 @@ Example incoming notification:
 }
 ```
 
+where:
+
+  - `object.id` : a reference to a Markdown document to update a Wiki.JS page
+  - `object.isVersionOf` : a reference to the page that one would like to update
+  
+The current version of the Wiki.JS page in Markdown format can be retrieved from
+
+```
+http://localhost:8000/resolve/https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171
+```
+
 ## Process the inbox
 
 ```
