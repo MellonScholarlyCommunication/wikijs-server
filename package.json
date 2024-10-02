@@ -10,12 +10,14 @@
     "server": "npx ldn-inbox-server start-server",
     "handle-inbox": "npx ldn-inbox-server handler @inbox -hn @handler/notification_handler/multi.js",
     "handle-outbox": "npx ldn-inbox-server handler @outbox -hn @handler/notification_handler/multi.js",
-    "real-clean": "rm inbox/* outbox/* error/*",
-    "wikijs-cli": "./node_modules/wikijs-cli/bin/wikijs-cli.js"
+    "real-clean": "rm inbox/* outbox/* error/*; npx eventlog-server remove-all",
+    "wikijs-cli": "./node_modules/wikijs-cli/bin/wikijs-cli.js",
+    "cache-admin": "npx eventlog-server",
+    "demo": "yarn real-clean; yarn post-data; yarn handle-inbox; yarn handle-outbox"
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "ldn-inbox-server": "^1.6.7",
+    "ldn-inbox-server": "^1.6.9",
     "log4js": "^6.9.1",
     "md5": "^2.3.0",
     "string-similarity-js": "^2.1.4",

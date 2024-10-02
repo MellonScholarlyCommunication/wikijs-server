@@ -3,7 +3,17 @@
         "multi": {
             "handlers": [
                 [
-                "@handler/notification_handler/send_notification.js"
+                    {
+                        "id": "@handler/notification_handler/send_notification.js"
+                    },
+                    // Restore the original notification
+                    {
+                        "id": "./handler/restore_original_notification.js"
+                    },
+                    // Cache this notification for later use
+                    {
+                        "id": "./handler/notification_cache.js"
+                    }
                 ]
             ]
         }

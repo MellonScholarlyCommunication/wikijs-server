@@ -25,8 +25,8 @@ async function handle({path,options,config,notification}) {
                 origin: config['origin'],
                 inReplyTo: notification['id'],
                 object: {
-                    id: notification['object']['context'],
-                    type: "Document"
+                    id: notification['object']['isVersionOf']['id'],
+                    type: "WebPage"
                 },
                 target: notification['actor']
         };

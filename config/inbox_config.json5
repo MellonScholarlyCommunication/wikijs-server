@@ -13,10 +13,13 @@
                         ]
                     ]
                  },
+                 // Cache this notification for later use
+                 {
+                    "id": "./handler/notification_cache.js"
+                 },
                  // Update the wikijs
                  "./handler/wikijs_update.js",
                  // Send an Announce reply
-                 
                  {
                     "id": "./handler/announce_result.js",
                     "actor": {

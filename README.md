@@ -10,6 +10,7 @@ yarn install
 
 ```
 npm link wikijs-cli
+npm link eventlog-server
 ```
 
 ## Run the server
