@@ -5,7 +5,7 @@ const logger = require('ldn-inbox-server').getLogger();
  * Return the Markdown of a wiki page if exists
  */
 async function handle(req,res,config) {
-    const resolvent = req.url.replace(/^\/[^\/]+\//,'');
+    const resolvent = req.url.replace(/^\/[^\/]+\//,'').replace(/https:\/+/,'https://');
     const options = {
         url: process.env.WIKIJS_URL ,
         token: process.env.WIKIJS_ACCESS_TOKEN
