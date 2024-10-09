@@ -20,6 +20,11 @@
           "path": "resolve/.*" ,
           "do": "./handler/page_resolver.js",
           "with" : {}
+        },
+        {
+          "path": "rdf/.*" ,
+          "do": "./handler/page_rdf.js",
+          "with": {}
         }
     ]
 }
