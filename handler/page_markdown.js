@@ -15,7 +15,7 @@ async function handle(req,res,config) {
 
     if (!resolvedPage) {
         res.writeHead(404);
-        res.end(`No such page`);
+        res.end(`No such page ${resolvent}`);
         return;
     }
 
