@@ -2,7 +2,7 @@ const { resolvePage , getPage , toRDF } = require('wikijs-cli');
 const logger = require('ldn-inbox-server').getLogger();
 
 /**
- * Return the Markdown of a wiki page if exists
+ * Return the Turtle of a wiki page if exists
  */
 async function handle(req,res,config) {
     const resolvent = req.url.replace(/^\/[^\/]+\//,'');

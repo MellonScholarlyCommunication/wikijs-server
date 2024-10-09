@@ -17,8 +17,8 @@
           }
         },
         {
-          "path": "resolve/.*" ,
-          "do": "./handler/page_resolver.js",
+          "path": "markdown/.*" ,
+          "do": "./handler/page_markdown.js",
           "with" : {}
         },
         {

@@ -129,3 +129,10 @@ yarn run handle-outbox
 yarn run real-clean
 ```
 
+## Request the markdown of a wikijs page
+
+http://localhost:8000/markdown/https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171
+
+## Request the rdf (turtle) of a wikijs page
+
+http://localhost:8000/rdf/https://wiki.mycontributions.info/en/researcher/orcid/0000-0001-8390-6171
