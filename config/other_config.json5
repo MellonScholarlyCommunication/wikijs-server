@@ -1,5 +1,6 @@
 {
     "registry": [
+      /*
         { "path": "inbox/.*" , 
           "with": {
             "url": "inbox/",
@@ -16,6 +17,7 @@
             "inboxWritable": 0
           }
         },
+      */
         {
           "path": "markdown/.*" ,
           "do": "./handler/page_markdown.js",
